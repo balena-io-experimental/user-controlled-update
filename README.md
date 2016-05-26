@@ -6,6 +6,6 @@ resin.io is an update mechanism for embedded devices. It allows you to push an a
 
 Ordinarily resin devices download and automatically start whenever a developer pushes new code. However, there is a feature which allows you to write a `lockfile` on the device which prevents these automatic updates. This demo is a simple illustration of how you enable end-users to control when their devices receive the new update.
 
-<iframe width="420" height="315" src="https://www.youtube.com/embed/S7CUW5LCr1Y" frameborder="0" allowfullscreen></iframe>
+![screen-shot](screen-shot.png)
 
 For more info read the [full write up](https://resin.io/blog/end-user-controlled-updates)
