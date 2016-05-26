@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <title>resin.io update check</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body id="app">
+    <div v-cloak v-show="!hide" class="push-notification">
+      <h2 v-if="message"> {{ message }} </h2>
+      <div v-else>
+        <div v-if="!forced">
+          <span v-if="update_pending">Yay new stuff! </span>
+          <span v-else>Looks like you are already up to date</span>
+          <button v-if="update_pending" v-on:click="forceUpdate">Update Now</button>
+        </div>
+        <div v-else>
+          <img class="spinner" v-show="status != 'idle'" src="spinner.gif"/>
+          <span><b>{{ status }}</b></span>
+        </div>
+      </div>
+      <div class="right">
+        <button v-on:click="close" class="close">close</button>
+      </div>
+    </div>
+    <div class="container">
+      <h1>This is an example of user controlled updates with resin.io</h1>
+      <button v-on:click="checkForUpdates">Check for updates</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/vue/latest/vue.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+      var socket = io();
+
+      socket.on('supervisorState', function(data) {
+        console.log(data)
+        app.hide = false
+        app.status = data.status;
+        app.update_pending = data.update_pending;
+      });
+
+      socket.on('disconnect', function() {
+        app.message = "Your application is restarting and will be available again in a few seconds."
+      });
+
+      app = new Vue({
+        el: '#app',
+        data: {
+          hide: true,
+          update_pending: false,
+          status: null,
+          message: null,
+          forced: false,
+        },
+        methods: {
+          close: function () {
+            this.hide = true;
+          },
+          checkForUpdates: function() {
+            socket.emit('isUpdate');
+          },
+          forceUpdate: function () {
+            this.forced = true;
+            socket.emit('forceUpdate');
+          }
+        }
+      })
+      
+    </script>
+  </body>
+</html>

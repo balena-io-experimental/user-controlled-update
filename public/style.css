@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing:
+  border-box;
+}
+body {
+  font: 13px Helvetica, Arial;
+  color: #162521;
+  background: #E1E0E9;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+button {
+  background: #7DEEB6;
+  border: none;
+  padding: 12px;
+}
+
+span {
+  vertical-align: middle;
+}
+
+.container {
+  width: 80%;
+  margin: 20% auto;
+  text-align: center;
+}
+
+.spinner {
+  max-width: 50px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.push-notification {
+  background: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.push-notification button, .push-notification img {
+  margin-left: 10px;
+}
+
+.close {
+  float: right;
+}
+
+[v-cloak] {
+  display: none;
+}
